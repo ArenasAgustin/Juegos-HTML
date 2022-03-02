@@ -89,14 +89,6 @@ var enemy = function (x, y) {
   this.frame = 0;
 
   this.draw = () => {
-    /* ctx.fillStyle = this.color;
-    ctx.fillRect(
-      this.x * sideSquare,
-      this.y * sideSquare,
-      sideSquare,
-      sideSquare
-    ); */
-
     ctx.drawImage(
       tileMap,
       0,
@@ -154,14 +146,6 @@ var player = function () {
   this.key = false;
 
   this.draw = () => {
-    /* ctx.fillStyle = this.color;
-    ctx.fillRect(
-      this.x * sideSquare,
-      this.y * sideSquare,
-      sideSquare,
-      sideSquare
-    ); */
-
     ctx.drawImage(
       tileMap,
       32,
