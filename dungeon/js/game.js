@@ -113,18 +113,16 @@ var player = function () {
     }
 
     if (object === 1) {
-      if(this.key){
+      if (this.key) {
         this.x = 1;
-      this.y = 1;
+        this.y = 1;
 
-      this.key = false;
+        this.key = false;
 
-      stage[8][3] = 3;
+        stage[8][3] = 3;
 
-      console.log("Has ganado!!!");
-      }
-
-      else{
+        console.log("Has ganado!!!");
+      } else {
         console.log("Te falta la llave, no puedes pasar");
       }
     }
@@ -132,6 +130,13 @@ var player = function () {
 };
 
 function initialize() {
+  let keyUp = {
+    key37: true,
+    key38: true,
+    key39: true,
+    key40: true,
+  };
+
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
 
@@ -140,26 +145,35 @@ function initialize() {
 
   //LECTURA DEL TECLADO
   document.addEventListener("keydown", (key) => {
-    switch (key.keyCode) {
-      case 38:
-        protagonist.up();
-        break;
-
-      case 40:
-        protagonist.down();
-        break;
-
-      case 37:
-        protagonist.left();
-        break;
-
-      case 39:
-        protagonist.right();
-        break;
-
-      default:
-        break;
+    if (key.keyCode === 37 && keyUp.key37) {
+      protagonist.left();
+      keyUp.key37 = false;
     }
+
+    if (key.keyCode === 38 && keyUp.key38) {
+      protagonist.up();
+      keyUp.key38 = false;
+    }
+
+    if (key.keyCode === 39 && keyUp.key39) {
+      protagonist.right();
+      keyUp.key39 = false;
+    }
+
+    if (key.keyCode === 40 && keyUp.key40) {
+      protagonist.down();
+      keyUp.key40 = false;
+    }
+  });
+
+  document.addEventListener("keyup", (key) => {
+    if (key.keyCode === 37) keyUp.key37 = true;
+
+    if (key.keyCode === 38) keyUp.key38 = true;
+
+    if (key.keyCode === 39) keyUp.key39 = true;
+
+    if (key.keyCode === 40) keyUp.key40 = true;
   });
 
   setInterval(() => principal(), 1000 / FPS);
