@@ -12,14 +12,14 @@ var tileMap;
 
 var stage = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 2, 2, 0, 0, 0, 2, 2, 2, 2, 0, 0, 2, 2, 0],
-  [0, 0, 2, 2, 2, 2, 2, 0, 0, 2, 0, 0, 2, 0, 0],
-  [0, 0, 2, 0, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 0],
-  [0, 0, 2, 2, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0],
-  [0, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0],
-  [0, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 2, 2, 2, 0],
-  [0, 2, 2, 2, 0, 0, 2, 0, 0, 1, 0, 0, 0, 2, 0],
-  [0, 2, 2, 3, 0, 0, 2, 0, 0, 2, 2, 2, 2, 2, 0],
+  [0, 2, 3, 0, 0, 0, 3, 3, 3, 3, 0, 0, 3, 3, 0],
+  [0, 0, 3, 3, 3, 3, 3, 0, 0, 3, 0, 0, 3, 0, 0],
+  [0, 0, 3, 0, 0, 0, 3, 3, 0, 3, 3, 3, 3, 0, 0],
+  [0, 0, 3, 3, 3, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0],
+  [0, 3, 3, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0],
+  [0, 0, 3, 0, 0, 0, 3, 3, 0, 0, 0, 3, 3, 3, 0],
+  [0, 3, 3, 3, 0, 0, 3, 0, 0, 1, 0, 0, 0, 3, 0],
+  [0, 3, 3, 4, 0, 0, 3, 0, 0, 3, 3, 3, 3, 3, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
@@ -66,7 +66,7 @@ var torch = function (x, y) {
 
     ctx.drawImage(
       tileMap,
-      this.frame *  32,
+      this.frame * 32,
       64,
       32,
       32,
@@ -79,7 +79,7 @@ var torch = function (x, y) {
 };
 
 //OBJETO enemy
-var enemy = function (x, y) {
+var enemy = function (x, y, image) {
   this.x = x;
   this.y = y;
 
@@ -91,7 +91,7 @@ var enemy = function (x, y) {
   this.draw = () => {
     ctx.drawImage(
       tileMap,
-      0,
+      32 * image,
       32,
       32,
       32,
@@ -103,7 +103,7 @@ var enemy = function (x, y) {
   };
 
   this.testCollision = (x, y) =>
-    stage[y][x] === 0 || stage[y][x] === 3 || stage[y][x] === 1;
+    stage[y][x] === 0 || stage[y][x] === 4 || stage[y][x] === 1 || stage[y][x] === 2;
 
   this.move = () => {
     protagonist.enemyCollision(this.x, this.y);
@@ -148,7 +148,7 @@ var player = function () {
   this.draw = () => {
     ctx.drawImage(
       tileMap,
-      32,
+      0,
       32,
       32,
       32,
@@ -166,7 +166,7 @@ var player = function () {
 
       this.key = false;
 
-      stage[8][3] = 3;
+      stage[8][3] = 4;
 
       console.log("Has perdido!!!");
     }
@@ -208,15 +208,15 @@ var player = function () {
 
     this.key = false;
 
-    stage[8][3] = 3;
+    stage[8][3] = 4;
   };
 
   this.objectLogic = () => {
     let object = stage[this.y][this.x];
 
-    if (object === 3) {
+    if (object === 4) {
       this.key = true;
-      stage[this.y][this.x] = 2;
+      stage[this.y][this.x] = 3;
 
       console.log("Has obtenido la llave!!!");
     }
@@ -250,7 +250,7 @@ function initialize() {
   };
 
   tileMap = new Image();
-  tileMap.src = "./img/tileMap.png";
+  tileMap.src = "./img/tileMap2.png";
 
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
@@ -259,9 +259,9 @@ function initialize() {
   protagonist = new player();
 
   //CREAMOS enemigos
-  enemies.push(new enemy(4, 4));
-  enemies.push(new enemy(6, 8));
-  enemies.push(new enemy(13, 1));
+  enemies.push(new enemy(4, 4, 1));
+  enemies.push(new enemy(6, 8, 2));
+  enemies.push(new enemy(13, 1, 3));
 
   //CREAMOS TORCHES
   torches.push(new torch(0, 0));
