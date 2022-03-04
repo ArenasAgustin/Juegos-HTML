@@ -103,7 +103,10 @@ var enemy = function (x, y, image) {
   };
 
   this.testCollision = (x, y) =>
-    stage[y][x] === 0 || stage[y][x] === 4 || stage[y][x] === 1 || stage[y][x] === 2;
+    stage[y][x] === 0 ||
+    stage[y][x] === 4 ||
+    stage[y][x] === 1 ||
+    stage[y][x] === 2;
 
   this.move = () => {
     protagonist.enemyCollision(this.x, this.y);
@@ -116,22 +119,21 @@ var enemy = function (x, y, image) {
         case 0:
           if (!this.testCollision(this.x, this.y - 1)) this.y--;
           else this.direction = Math.floor(Math.random() * 4);
-
           break;
+
         case 1:
           if (!this.testCollision(this.x, this.y + 1)) this.y++;
           else this.direction = Math.floor(Math.random() * 4);
-
           break;
+
         case 2:
           if (!this.testCollision(this.x - 1, this.y)) this.x--;
           else this.direction = Math.floor(Math.random() * 4);
-
           break;
+
         default:
           if (!this.testCollision(this.x + 1, this.y)) this.x++;
           else this.direction = Math.floor(Math.random() * 4);
-
           break;
       }
     }
@@ -177,6 +179,7 @@ var player = function () {
   this.up = () => {
     if (this.margin(this.x, this.y - 1) === false) {
       this.y--;
+
       this.objectLogic();
     }
   };
@@ -184,6 +187,7 @@ var player = function () {
   this.down = () => {
     if (this.margin(this.x, this.y + 1) === false) {
       this.y++;
+
       this.objectLogic();
     }
   };
@@ -191,6 +195,7 @@ var player = function () {
   this.left = () => {
     if (this.margin(this.x - 1, this.y) === false) {
       this.x--;
+
       this.objectLogic();
     }
   };
@@ -198,6 +203,7 @@ var player = function () {
   this.right = () => {
     if (this.margin(this.x + 1, this.y) === false) {
       this.x++;
+
       this.objectLogic();
     }
   };
@@ -216,6 +222,7 @@ var player = function () {
 
     if (object === 4) {
       this.key = true;
+
       stage[this.y][this.x] = 3;
 
       console.log("Has obtenido la llave!!!");
@@ -294,11 +301,8 @@ function initialize() {
 
   document.addEventListener("keyup", (key) => {
     if (key.keyCode === 37) keyUp.key37 = true;
-
     if (key.keyCode === 38) keyUp.key38 = true;
-
     if (key.keyCode === 39) keyUp.key39 = true;
-
     if (key.keyCode === 40) keyUp.key40 = true;
   });
 
