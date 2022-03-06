@@ -11,7 +11,7 @@ var torches = [];
 var tileMap;
 
 var stage;
-var level = 0;
+var level = randomizer();
 
 function drawStage() {
   for (y = 0; y < 10; y++) {

@@ -78,7 +78,8 @@ var player = function () {
     level = randomizer(level);
 
     resetEnemies(level);
-    stage = stages[level];
+    stage = [...stages[level]];
+    stage[keyPosition[`level${level}`][1]][keyPosition[`level${level}`][0]] = 4;
   };
 
   this.objectLogic = () => {
