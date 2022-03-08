@@ -140,17 +140,17 @@ var pieceObj = function () {
 
   this.clearLine = function () {
     for (let i = marginTop; i < heightBoard; i++) {
-      let completed = true;
+      let completed = 0;
 
       for (let j = 1; j <= widthBoard; j++) {
-        if (board[i][j] === 0) {
-          completed = false;
+        if (board[i][j] !== 0) {
+          completed++;
         }
       }
 
-      if (completed) {
-        board.splice(i, 1);
+      if (completed === widthBoard) {
         board.unshift(line);
+        board.splice(i + 1, 1);
       }
     }
   };
