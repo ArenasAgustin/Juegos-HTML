@@ -25,9 +25,36 @@ var green = "#008000";
 var cyan = "#00CED1";
 var blue = "#0000CD";
 
+//nueva linea
+const line = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+
 //MATRIZ TABLERO (12x21)
 //LA MATRIZ ES MAYOR PORQUE AÑADIMOS MÁRGENES PARA LAS COLISIONES
 var board = [
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+];
+
+const auxBoard = [
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -265,7 +292,9 @@ var tabGraphics = [
   ],
 ];
 
-function resetBoard() {}
+function gameOver() {
+  board = [...auxBoard];
+}
 
 //OBJETO PIEZA
 var pieceObj = function () {
@@ -290,6 +319,7 @@ var pieceObj = function () {
       if (!this.collision(this.angle, this.y + 1, this.x)) this.y++;
       else {
         this.setPiece();
+        this.clearLine();
         this.newPiece();
 
         if (this.checkLose()) {
@@ -391,6 +421,23 @@ var pieceObj = function () {
     }
 
     return false;
+  };
+
+  this.clearLine = function () {
+    for (let i = marginTop; i < heightBoard; i++) {
+      let completed = true;
+
+      for (let j = 1; j <= widthBoard; j++) {
+        if (board[i][j] === 0) {
+          completed = false;
+        }
+      }
+
+      if (completed) {
+        board.splice(i, 1);
+        board.unshift(line);
+      }
+    }
   };
 
   this.newPiece();
