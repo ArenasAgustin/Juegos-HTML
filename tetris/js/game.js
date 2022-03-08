@@ -2,51 +2,431 @@ var canvas;
 var ctx;
 var FPS = 50;
 
-var sideSquare = 50;
+//DIMENSIONES DEL CANVAS
+var heightCanvas = 640;
+var widthCanvas = 400;
 
-var wall = "#044f14";
-var door = "#3a1700";
-var earth = "#c6892f";
-var key = "#c6bc00";
+var marginTop = 4;
+var marginLeft = 1;
 
-var stage = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 2, 2, 0, 0, 0, 2, 2, 2, 2, 0, 0, 2, 2, 0],
-  [0, 0, 2, 2, 2, 2, 2, 0, 0, 2, 0, 0, 2, 0, 0],
-  [0, 0, 2, 0, 0, 0, 2, 2, 0, 2, 2, 2, 2, 0, 0],
-  [0, 0, 2, 2, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0],
-  [0, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0],
-  [0, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 2, 2, 2, 0],
-  [0, 2, 2, 2, 0, 0, 2, 0, 0, 1, 0, 0, 0, 2, 0],
-  [0, 2, 2, 3, 0, 0, 2, 0, 0, 2, 2, 2, 2, 2, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+//TABLERO (10x16)
+var heightBoard = 20;
+var widthBoard = 10;
+
+//DIMENSIONES REALES DE CADA CUADRO DEL TABLERO (40x40 pixels)
+var sideSquare = 40;
+
+//COLORES DE LAS FICHAS
+var red = "#FF0000";
+var purple = "#800080";
+var orange = "#FF8C00";
+var yellow = "#FFD700";
+var green = "#008000";
+var cyan = "#00CED1";
+var blue = "#0000CD";
+
+//MATRIZ TABLERO (12x21)
+//LA MATRIZ ES MAYOR PORQUE AÑADIMOS MÁRGENES PARA LAS COLISIONES
+var board = [
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
-function drawStage() {
-  var color;
+//DIBUJO DE LAS PIEZAS (Matriz de 4 dimensiones)
+// fichaGrafico [Pieza] [Posición/rotación] [y] [x]
+var tabGraphics = [
+  [
+    [
+      [0, 0, 0, 0],
+      [0, 1, 1, 0],
+      [0, 1, 1, 0],
+      [0, 0, 0, 0],
+    ],
 
-  for (y = 0; y < 10; y++) {
-    for (x = 0; x < 15; x++) {
-      switch (stage[y][x]) {
-        case 1:
-          color = door;
-          break;
+    [
+      [0, 0, 0, 0],
+      [0, 1, 1, 0],
+      [0, 1, 1, 0],
+      [0, 0, 0, 0],
+    ],
 
-        case 2:
-          color = earth;
-          break;
+    [
+      [0, 0, 0, 0],
+      [0, 1, 1, 0],
+      [0, 1, 1, 0],
+      [0, 0, 0, 0],
+    ],
 
-        case 3:
-          color = key;
-          break;
+    [
+      [0, 0, 0, 0],
+      [0, 1, 1, 0],
+      [0, 1, 1, 0],
+      [0, 0, 0, 0],
+    ],
+  ],
 
-        default:
-          color = wall;
-          break;
+  [
+    [
+      [0, 0, 0, 0],
+      [2, 2, 2, 2],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 2, 0],
+      [0, 0, 2, 0],
+      [0, 0, 2, 0],
+      [0, 0, 2, 0],
+    ],
+
+    [
+      [0, 0, 0, 0],
+      [2, 2, 2, 2],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 2, 0],
+      [0, 0, 2, 0],
+      [0, 0, 2, 0],
+      [0, 0, 2, 0],
+    ],
+  ],
+
+  [
+    [
+      [0, 0, 0, 0],
+      [0, 0, 3, 3],
+      [0, 3, 3, 0],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 3, 0],
+      [0, 0, 3, 3],
+      [0, 0, 0, 3],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 0, 0],
+      [0, 0, 3, 3],
+      [0, 3, 3, 0],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 3, 0],
+      [0, 0, 3, 3],
+      [0, 0, 0, 3],
+      [0, 0, 0, 0],
+    ],
+  ],
+
+  [
+    [
+      [0, 0, 0, 0],
+      [0, 4, 4, 0],
+      [0, 0, 4, 4],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 0, 4],
+      [0, 0, 4, 4],
+      [0, 0, 4, 0],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 0, 0],
+      [0, 4, 4, 0],
+      [0, 0, 4, 4],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 0, 4],
+      [0, 0, 4, 4],
+      [0, 0, 4, 0],
+      [0, 0, 0, 0],
+    ],
+  ],
+
+  [
+    [
+      [0, 0, 0, 0],
+      [0, 5, 5, 5],
+      [0, 5, 0, 0],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 5, 0],
+      [0, 0, 5, 0],
+      [0, 0, 5, 5],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 0, 5],
+      [0, 5, 5, 5],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 5, 5, 0],
+      [0, 0, 5, 0],
+      [0, 0, 5, 0],
+      [0, 0, 0, 0],
+    ],
+  ],
+
+  [
+    [
+      [0, 0, 0, 0],
+      [0, 6, 6, 6],
+      [0, 0, 0, 6],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 6, 6],
+      [0, 0, 6, 0],
+      [0, 0, 6, 0],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 6, 0, 0],
+      [0, 6, 6, 6],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 6, 0],
+      [0, 0, 6, 0],
+      [0, 6, 6, 0],
+      [0, 0, 0, 0],
+    ],
+  ],
+
+  [
+    [
+      [0, 0, 0, 0],
+      [0, 7, 7, 7],
+      [0, 0, 7, 0],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 7, 0],
+      [0, 0, 7, 7],
+      [0, 0, 7, 0],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 7, 0],
+      [0, 7, 7, 7],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
+
+    [
+      [0, 0, 7, 0],
+      [0, 7, 7, 0],
+      [0, 0, 7, 0],
+      [0, 0, 0, 0],
+    ],
+  ],
+];
+
+function resetBoard() {}
+
+//OBJETO PIEZA
+var pieceObj = function () {
+  this.x = 4;
+  this.y = 0;
+
+  this.angle = 0;
+  this.type = 4;
+
+  this.frames = 0;
+  this.timeOut = 50;
+
+  this.newPiece = function () {
+    this.type = Math.floor(Math.random() * 7);
+    this.x = 4;
+    this.y = 0;
+  };
+
+  this.fall = function () {
+    if (this.frame < this.timeOut) this.frame++;
+    else {
+      if (!this.collision(this.angle, this.y + 1, this.x)) this.y++;
+      else {
+        this.setPiece();
+        this.newPiece();
+
+        if (this.checkLose()) {
+          gameOver();
+          return;
+        }
       }
 
-      ctx.fillStyle = color;
-      ctx.fillRect(x * sideSquare, y * sideSquare, sideSquare, sideSquare);
+      this.frame = 0;
+    }
+  };
+
+  this.setPiece = function () {
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        if (tabGraphics[this.type][this.angle][i][j] > 0) {
+          board[this.y + i][this.x + j] =
+            tabGraphics[this.type][this.angle][i][j];
+        }
+      }
+    }
+  };
+
+  this.draw = function () {
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        if (tabGraphics[this.type][this.angle][i][j] !== 0) {
+          if (tabGraphics[this.type][this.angle][i][j] === 1)
+            ctx.fillStyle = red;
+
+          if (tabGraphics[this.type][this.angle][i][j] === 2)
+            ctx.fillStyle = purple;
+
+          if (tabGraphics[this.type][this.angle][i][j] === 3)
+            ctx.fillStyle = orange;
+
+          if (tabGraphics[this.type][this.angle][i][j] === 4)
+            ctx.fillStyle = yellow;
+
+          if (tabGraphics[this.type][this.angle][i][j] === 5)
+            ctx.fillStyle = green;
+
+          if (tabGraphics[this.type][this.angle][i][j] === 6)
+            ctx.fillStyle = cyan;
+
+          if (tabGraphics[this.type][this.angle][i][j] === 7)
+            ctx.fillStyle = blue;
+
+          ctx.fillRect(
+            (this.x + j - marginLeft) * sideSquare,
+            (this.y + i - marginTop) * sideSquare,
+            sideSquare,
+            sideSquare
+          );
+        }
+      }
+    }
+  };
+
+  this.collision = function (newAngle, newY, newX) {
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        if (
+          tabGraphics[this.type][newAngle][i][j] !== 0 &&
+          board[newY + i][newX + j] !== 0
+        ) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  };
+
+  this.rotate = function () {
+    let newAngle = this.angle;
+
+    if (newAngle < 3) newAngle++;
+    else newAngle = 0;
+
+    if (!this.collision(newAngle, this.y, this.x)) this.angle = newAngle;
+  };
+
+  this.left = function () {
+    if (!this.collision(this.angle, this.y, this.x - 1)) this.x--;
+  };
+
+  this.right = function () {
+    if (!this.collision(this.angle, this.y, this.x + 1)) this.x++;
+  };
+
+  this.down = function () {
+    if (!this.collision(this.angle, this.y + 1, this.x)) this.y++;
+  };
+
+  this.checkLose = function () {
+    for (let i = 1; i <= widthBoard; i++) {
+      if (board[2][i] > 0) return true;
+    }
+
+    return false;
+  };
+
+  this.newPiece();
+};
+
+function initializeKeyboard() {
+  document.addEventListener("keydown", (key) => {
+    if (key.keyCode === 37) piece.left();
+
+    if (key.keyCode === 38) piece.rotate();
+
+    if (key.keyCode === 39) piece.right();
+
+    if (key.keyCode === 40) piece.down();
+  });
+}
+
+function drawBoard() {
+  for (let i = marginTop; i <= heightBoard; i++) {
+    for (let j = marginLeft; j <= widthBoard; j++) {
+      if (board[i][j] !== 0) {
+        if (board[i][j] === 1) ctx.fillStyle = red;
+        if (board[i][j] === 2) ctx.fillStyle = purple;
+        if (board[i][j] === 3) ctx.fillStyle = orange;
+        if (board[i][j] === 4) ctx.fillStyle = yellow;
+        if (board[i][j] === 5) ctx.fillStyle = green;
+        if (board[i][j] === 6) ctx.fillStyle = cyan;
+        if (board[i][j] === 7) ctx.fillStyle = blue;
+
+        ctx.fillRect(
+          (j - marginLeft) * sideSquare,
+          (i - marginTop) * sideSquare,
+          sideSquare,
+          sideSquare
+        );
+      }
     }
   }
 }
@@ -55,38 +435,25 @@ function initialize() {
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
 
-  //LECTURA DEL TECLADO
-  document.addEventListener("keydown", (key) => {
-    if (key.keyCode === 37 && keyUp.key37) {
-      protagonist.left();
-      keyUp.key37 = false;
-    }
+  canvas.width = widthCanvas;
+  canvas.height = heightCanvas;
 
-    if (key.keyCode === 38 && keyUp.key38) {
-      protagonist.up();
-      keyUp.key38 = false;
-    }
+  piece = new pieceObj();
 
-    if (key.keyCode === 39 && keyUp.key39) {
-      protagonist.right();
-      keyUp.key39 = false;
-    }
-
-    if (key.keyCode === 40 && keyUp.key40) {
-      protagonist.down();
-      keyUp.key40 = false;
-    }
-  });
+  initializeKeyboard();
 
   setInterval(() => principal(), 1000 / FPS);
 }
 
 function deleteCanvas() {
-  canvas.width = 750;
-  canvas.height = 500;
+  canvas.width = widthCanvas;
+  canvas.height = heightCanvas;
 }
 
 function principal() {
   deleteCanvas();
-  drawStage();
+  drawBoard();
+
+  piece.fall();
+  piece.draw();
 }
