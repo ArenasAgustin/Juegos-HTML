@@ -37,7 +37,7 @@ function initialize() {
   camera = new objCamera(5, 5, 0, 0, 0, 0);
 
   //CREAMOS AL player
-  /* protagonist = new player(); */
+  protagonist = new player();
 
   //CREAMOS enemigos
   /* enemies.push(new enemy(4, 4, 1));
@@ -77,9 +77,9 @@ function principal() {
 
   camera.draw();
 
-  /* protagonist.draw();
+  protagonist.draw();
 
-  for (let i = 0; i < enemies.length; i++) {
+  /* for (let i = 0; i < enemies.length; i++) {
     enemies[i].move();
     enemies[i].draw();
   } */
