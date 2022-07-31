@@ -39,8 +39,7 @@ var pieceObj = function () {
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
         if (tabGraphics[this.type][this.angle][i][j] > 0) {
-          board[this.y + i][this.x + j] =
-            tabGraphics[this.type][this.angle][i][j];
+          board[this.y + i][this.x + j] = tabGraphics[this.type][this.angle][i][j];
         }
       }
     }
@@ -83,12 +82,7 @@ var pieceObj = function () {
               break;
           }
 
-          ctx.fillRect(
-            (this.x + j - marginLeft) * sideSquare,
-            (this.y + i - marginTop) * sideSquare,
-            sideSquare,
-            sideSquare
-          );
+          ctx.fillRect((this.x + j - marginLeft) * sideSquare, (this.y + i - marginTop) * sideSquare, sideSquare, sideSquare);
         }
       }
     }
@@ -97,10 +91,7 @@ var pieceObj = function () {
   this.collision = function (newAngle, newY, newX) {
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
-        if (
-          tabGraphics[this.type][newAngle][i][j] !== 0 &&
-          board[newY + i][newX + j] !== 0
-        ) {
+        if (tabGraphics[this.type][newAngle][i][j] !== 0 && board[newY + i][newX + j] !== 0) {
           return true;
         }
       }

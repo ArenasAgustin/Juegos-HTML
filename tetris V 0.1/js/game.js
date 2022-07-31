@@ -17,13 +17,13 @@ var widthBoard = 10;
 var sideSquare = 40;
 
 //COLORES DE LAS FICHAS
-var red = "#FF0000";
-var purple = "#800080";
-var orange = "#FF8C00";
-var yellow = "#FFD700";
-var green = "#008000";
-var cyan = "#00CED1";
-var blue = "#0000CD";
+var red = '#FF0000';
+var purple = '#800080';
+var orange = '#FF8C00';
+var yellow = '#FFD700';
+var green = '#008000';
+var cyan = '#00CED1';
+var blue = '#0000CD';
 
 //nueva linea
 const line = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
@@ -336,8 +336,7 @@ var pieceObj = function () {
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
         if (tabGraphics[this.type][this.angle][i][j] > 0) {
-          board[this.y + i][this.x + j] =
-            tabGraphics[this.type][this.angle][i][j];
+          board[this.y + i][this.x + j] = tabGraphics[this.type][this.angle][i][j];
         }
       }
     }
@@ -347,33 +346,21 @@ var pieceObj = function () {
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
         if (tabGraphics[this.type][this.angle][i][j] !== 0) {
-          if (tabGraphics[this.type][this.angle][i][j] === 1)
-            ctx.fillStyle = red;
+          if (tabGraphics[this.type][this.angle][i][j] === 1) ctx.fillStyle = red;
 
-          if (tabGraphics[this.type][this.angle][i][j] === 2)
-            ctx.fillStyle = purple;
+          if (tabGraphics[this.type][this.angle][i][j] === 2) ctx.fillStyle = purple;
 
-          if (tabGraphics[this.type][this.angle][i][j] === 3)
-            ctx.fillStyle = orange;
+          if (tabGraphics[this.type][this.angle][i][j] === 3) ctx.fillStyle = orange;
 
-          if (tabGraphics[this.type][this.angle][i][j] === 4)
-            ctx.fillStyle = yellow;
+          if (tabGraphics[this.type][this.angle][i][j] === 4) ctx.fillStyle = yellow;
 
-          if (tabGraphics[this.type][this.angle][i][j] === 5)
-            ctx.fillStyle = green;
+          if (tabGraphics[this.type][this.angle][i][j] === 5) ctx.fillStyle = green;
 
-          if (tabGraphics[this.type][this.angle][i][j] === 6)
-            ctx.fillStyle = cyan;
+          if (tabGraphics[this.type][this.angle][i][j] === 6) ctx.fillStyle = cyan;
 
-          if (tabGraphics[this.type][this.angle][i][j] === 7)
-            ctx.fillStyle = blue;
+          if (tabGraphics[this.type][this.angle][i][j] === 7) ctx.fillStyle = blue;
 
-          ctx.fillRect(
-            (this.x + j - marginLeft) * sideSquare,
-            (this.y + i - marginTop) * sideSquare,
-            sideSquare,
-            sideSquare
-          );
+          ctx.fillRect((this.x + j - marginLeft) * sideSquare, (this.y + i - marginTop) * sideSquare, sideSquare, sideSquare);
         }
       }
     }
@@ -382,10 +369,7 @@ var pieceObj = function () {
   this.collision = function (newAngle, newY, newX) {
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
-        if (
-          tabGraphics[this.type][newAngle][i][j] !== 0 &&
-          board[newY + i][newX + j] !== 0
-        ) {
+        if (tabGraphics[this.type][newAngle][i][j] !== 0 && board[newY + i][newX + j] !== 0) {
           return true;
         }
       }
@@ -444,7 +428,7 @@ var pieceObj = function () {
 };
 
 function initializeKeyboard() {
-  document.addEventListener("keydown", (key) => {
+  document.addEventListener('keydown', (key) => {
     if (key.keyCode === 37) piece.left();
 
     if (key.keyCode === 38) piece.rotate();
@@ -467,20 +451,15 @@ function drawBoard() {
         if (board[i][j] === 6) ctx.fillStyle = cyan;
         if (board[i][j] === 7) ctx.fillStyle = blue;
 
-        ctx.fillRect(
-          (j - marginLeft) * sideSquare,
-          (i - marginTop) * sideSquare,
-          sideSquare,
-          sideSquare
-        );
+        ctx.fillRect((j - marginLeft) * sideSquare, (i - marginTop) * sideSquare, sideSquare, sideSquare);
       }
     }
   }
 }
 
 function initialize() {
-  canvas = document.getElementById("canvas");
-  ctx = canvas.getContext("2d");
+  canvas = document.getElementById('canvas');
+  ctx = canvas.getContext('2d');
 
   canvas.width = widthCanvas;
   canvas.height = heightCanvas;

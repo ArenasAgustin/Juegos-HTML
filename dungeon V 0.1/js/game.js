@@ -4,10 +4,10 @@ var FPS = 50;
 
 var sideSquare = 50;
 
-var wall = "#044f14";
-var door = "#3a1700";
-var earth = "#c6892f";
-var key = "#c6bc00";
+var wall = '#044f14';
+var door = '#3a1700';
+var earth = '#c6892f';
+var key = '#c6bc00';
 
 var protagonist;
 
@@ -60,16 +60,11 @@ var player = function () {
 
   this.key = false;
 
-  this.color = "#820c01";
+  this.color = '#820c01';
 
   this.draw = () => {
     ctx.fillStyle = this.color;
-    ctx.fillRect(
-      this.x * sideSquare,
-      this.y * sideSquare,
-      sideSquare,
-      sideSquare
-    );
+    ctx.fillRect(this.x * sideSquare, this.y * sideSquare, sideSquare, sideSquare);
   };
 
   this.margin = (x, y) => stage[y][x] === 0;
@@ -109,7 +104,7 @@ var player = function () {
       this.key = true;
       stage[this.y][this.x] = 2;
 
-      console.log("Has obtenido la llave!!!");
+      console.log('Has obtenido la llave!!!');
     }
 
     if (object === 1) {
@@ -121,9 +116,9 @@ var player = function () {
 
         stage[8][3] = 3;
 
-        console.log("Has ganado!!!");
+        console.log('Has ganado!!!');
       } else {
-        console.log("Te falta la llave, no puedes pasar");
+        console.log('Te falta la llave, no puedes pasar');
       }
     }
   };
@@ -137,14 +132,14 @@ function initialize() {
     key40: true,
   };
 
-  canvas = document.getElementById("canvas");
-  ctx = canvas.getContext("2d");
+  canvas = document.getElementById('canvas');
+  ctx = canvas.getContext('2d');
 
   //CREAMOS AL player
   protagonist = new player();
 
   //LECTURA DEL TECLADO
-  document.addEventListener("keydown", (key) => {
+  document.addEventListener('keydown', (key) => {
     if (key.keyCode === 37 && keyUp.key37) {
       protagonist.left();
       keyUp.key37 = false;
@@ -166,7 +161,7 @@ function initialize() {
     }
   });
 
-  document.addEventListener("keyup", (key) => {
+  document.addEventListener('keyup', (key) => {
     if (key.keyCode === 37) keyUp.key37 = true;
 
     if (key.keyCode === 38) keyUp.key38 = true;

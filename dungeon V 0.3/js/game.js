@@ -21,17 +21,7 @@ function drawStage() {
       /* ctx.fillStyle = color;
       ctx.fillRect(x * sideSquare, y * sideSquare, sideSquare, sideSquare); */
 
-      ctx.drawImage(
-        tileMap,
-        tile * 32,
-        0,
-        32,
-        32,
-        x * sideSquare,
-        y * sideSquare,
-        sideSquare,
-        sideSquare
-      );
+      ctx.drawImage(tileMap, tile * 32, 0, 32, 32, x * sideSquare, y * sideSquare, sideSquare, sideSquare);
     }
   }
 }
@@ -47,10 +37,10 @@ function initialize() {
   stage = stages[level];
 
   tileMap = new Image();
-  tileMap.src = "./img/tileMap2.png";
+  tileMap.src = './img/tileMap2.png';
 
-  canvas = document.getElementById("canvas");
-  ctx = canvas.getContext("2d");
+  canvas = document.getElementById('canvas');
+  ctx = canvas.getContext('2d');
 
   //CREAMOS AL player
   protagonist = new player();
@@ -67,7 +57,7 @@ function initialize() {
   torches.push(new torch(14, 9));
 
   //LECTURA DEL TECLADO
-  document.addEventListener("keydown", (key) => {
+  document.addEventListener('keydown', (key) => {
     if (key.keyCode === 37 && keyUp.key37) {
       protagonist.left();
       keyUp.key37 = false;
@@ -89,7 +79,7 @@ function initialize() {
     }
   });
 
-  document.addEventListener("keyup", (key) => {
+  document.addEventListener('keyup', (key) => {
     if (key.keyCode === 37) keyUp.key37 = true;
 
     if (key.keyCode === 38) keyUp.key38 = true;

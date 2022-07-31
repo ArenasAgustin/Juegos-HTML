@@ -6,17 +6,7 @@ var player = function () {
   this.key = false;
 
   this.draw = () => {
-    ctx.drawImage(
-      tileMap,
-      0,
-      32,
-      32,
-      32,
-      this.x * sideSquare,
-      this.y * sideSquare,
-      sideSquare,
-      sideSquare
-    );
+    ctx.drawImage(tileMap, 0, 32, 32, 32, this.x * sideSquare, this.y * sideSquare, sideSquare, sideSquare);
   };
 
   this.enemyCollision = (x, y) => {
@@ -28,7 +18,7 @@ var player = function () {
 
       stage[8][3] = 4;
 
-      console.log("Has perdido!!!");
+      console.log('Has perdido!!!');
     }
   };
 
@@ -89,7 +79,7 @@ var player = function () {
       this.key = true;
       stage[this.y][this.x] = 3;
 
-      console.log("Has obtenido la llave!!!");
+      console.log('Has obtenido la llave!!!');
     }
 
     if (object === 1) {
@@ -97,9 +87,9 @@ var player = function () {
         //this.resetKey();
         this.nextLevel();
 
-        console.log("Has ganado!!!");
+        console.log('Has ganado!!!');
       } else {
-        console.log("Te falta la llave, no puedes pasar");
+        console.log('Te falta la llave, no puedes pasar');
       }
     }
   };
@@ -108,7 +98,7 @@ var player = function () {
     if (this.x === x && this.y === y) {
       this.resetKey();
 
-      console.log("Has perdido!!!");
+      console.log('Has perdido!!!');
     }
   };
 };

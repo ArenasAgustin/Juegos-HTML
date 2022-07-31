@@ -1,5 +1,5 @@
 function initializeKeyboard() {
-  document.addEventListener("keydown", (key) => {
+  document.addEventListener('keydown', (key) => {
     switch (key.keyCode) {
       case 37:
         piece.left();
@@ -60,20 +60,15 @@ function drawBoard() {
             break;
         }
 
-        ctx.fillRect(
-          (j - marginLeft) * sideSquare,
-          (i - marginTop) * sideSquare,
-          sideSquare,
-          sideSquare
-        );
+        ctx.fillRect((j - marginLeft) * sideSquare, (i - marginTop) * sideSquare, sideSquare, sideSquare);
       }
     }
   }
 }
 
 function initialize() {
-  canvas = document.getElementById("canvas");
-  ctx = canvas.getContext("2d");
+  canvas = document.getElementById('canvas');
+  ctx = canvas.getContext('2d');
 
   canvas.width = widthCanvas;
   canvas.height = heightCanvas;

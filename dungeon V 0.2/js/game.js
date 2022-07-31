@@ -31,17 +31,7 @@ function drawStage() {
       /* ctx.fillStyle = color;
       ctx.fillRect(x * sideSquare, y * sideSquare, sideSquare, sideSquare); */
 
-      ctx.drawImage(
-        tileMap,
-        tile * 32,
-        0,
-        32,
-        32,
-        x * sideSquare,
-        y * sideSquare,
-        sideSquare,
-        sideSquare
-      );
+      ctx.drawImage(tileMap, tile * 32, 0, 32, 32, x * sideSquare, y * sideSquare, sideSquare, sideSquare);
     }
   }
 }
@@ -64,17 +54,7 @@ var torch = function (x, y) {
       else this.frame = 0;
     }
 
-    ctx.drawImage(
-      tileMap,
-      this.frame * 32,
-      64,
-      32,
-      32,
-      this.x * sideSquare,
-      this.y * sideSquare,
-      sideSquare,
-      sideSquare
-    );
+    ctx.drawImage(tileMap, this.frame * 32, 64, 32, 32, this.x * sideSquare, this.y * sideSquare, sideSquare, sideSquare);
   };
 };
 
@@ -89,24 +69,10 @@ var enemy = function (x, y, image) {
   this.frame = 0;
 
   this.draw = () => {
-    ctx.drawImage(
-      tileMap,
-      32 * image,
-      32,
-      32,
-      32,
-      this.x * sideSquare,
-      this.y * sideSquare,
-      sideSquare,
-      sideSquare
-    );
+    ctx.drawImage(tileMap, 32 * image, 32, 32, 32, this.x * sideSquare, this.y * sideSquare, sideSquare, sideSquare);
   };
 
-  this.testCollision = (x, y) =>
-    stage[y][x] === 0 ||
-    stage[y][x] === 4 ||
-    stage[y][x] === 1 ||
-    stage[y][x] === 2;
+  this.testCollision = (x, y) => stage[y][x] === 0 || stage[y][x] === 4 || stage[y][x] === 1 || stage[y][x] === 2;
 
   this.move = () => {
     protagonist.enemyCollision(this.x, this.y);
@@ -148,17 +114,7 @@ var player = function () {
   this.key = false;
 
   this.draw = () => {
-    ctx.drawImage(
-      tileMap,
-      0,
-      32,
-      32,
-      32,
-      this.x * sideSquare,
-      this.y * sideSquare,
-      sideSquare,
-      sideSquare
-    );
+    ctx.drawImage(tileMap, 0, 32, 32, 32, this.x * sideSquare, this.y * sideSquare, sideSquare, sideSquare);
   };
 
   this.enemyCollision = (x, y) => {
@@ -170,7 +126,7 @@ var player = function () {
 
       stage[8][3] = 4;
 
-      console.log("Has perdido!!!");
+      console.log('Has perdido!!!');
     }
   };
 
@@ -225,16 +181,16 @@ var player = function () {
 
       stage[this.y][this.x] = 3;
 
-      console.log("Has obtenido la llave!!!");
+      console.log('Has obtenido la llave!!!');
     }
 
     if (object === 1) {
       if (this.key) {
         this.resetKey();
 
-        console.log("Has ganado!!!");
+        console.log('Has ganado!!!');
       } else {
-        console.log("Te falta la llave, no puedes pasar");
+        console.log('Te falta la llave, no puedes pasar');
       }
     }
   };
@@ -243,7 +199,7 @@ var player = function () {
     if (this.x === x && this.y === y) {
       this.resetKey();
 
-      console.log("Has perdido!!!");
+      console.log('Has perdido!!!');
     }
   };
 };
@@ -257,10 +213,10 @@ function initialize() {
   };
 
   tileMap = new Image();
-  tileMap.src = "./img/tileMap2.png";
+  tileMap.src = './img/tileMap2.png';
 
-  canvas = document.getElementById("canvas");
-  ctx = canvas.getContext("2d");
+  canvas = document.getElementById('canvas');
+  ctx = canvas.getContext('2d');
 
   //CREAMOS AL player
   protagonist = new player();
@@ -277,7 +233,7 @@ function initialize() {
   torches.push(new torch(14, 9));
 
   //LECTURA DEL TECLADO
-  document.addEventListener("keydown", (key) => {
+  document.addEventListener('keydown', (key) => {
     if (key.keyCode === 37 && keyUp.key37) {
       protagonist.left();
       keyUp.key37 = false;
@@ -299,7 +255,7 @@ function initialize() {
     }
   });
 
-  document.addEventListener("keyup", (key) => {
+  document.addEventListener('keyup', (key) => {
     if (key.keyCode === 37) keyUp.key37 = true;
     if (key.keyCode === 38) keyUp.key38 = true;
     if (key.keyCode === 39) keyUp.key39 = true;

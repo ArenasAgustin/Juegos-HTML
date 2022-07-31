@@ -17,13 +17,13 @@ var widthBoard = 10;
 var sideSquare = 40;
 
 //COLORES DE LAS FICHAS
-var red = "#FF0000";
-var purple = "#800080";
-var orange = "#FF8C00";
-var yellow = "#FFD700";
-var green = "#008000";
-var cyan = "#00CED1";
-var blue = "#0000CD";
+var red = '#FF0000';
+var purple = '#800080';
+var orange = '#FF8C00';
+var yellow = '#FFD700';
+var green = '#008000';
+var cyan = '#00CED1';
+var blue = '#0000CD';
 
 //nueva linea
 const line = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];

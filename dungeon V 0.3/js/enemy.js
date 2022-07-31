@@ -9,24 +9,10 @@ var enemy = function (x, y, image) {
   this.frame = 0;
 
   this.draw = () => {
-    ctx.drawImage(
-      tileMap,
-      32 * image,
-      32,
-      32,
-      32,
-      this.x * sideSquare,
-      this.y * sideSquare,
-      sideSquare,
-      sideSquare
-    );
+    ctx.drawImage(tileMap, 32 * image, 32, 32, 32, this.x * sideSquare, this.y * sideSquare, sideSquare, sideSquare);
   };
 
-  this.testCollision = (x, y) =>
-    stage[y][x] === 0 ||
-    stage[y][x] === 4 ||
-    stage[y][x] === 1 ||
-    stage[y][x] === 2;
+  this.testCollision = (x, y) => stage[y][x] === 0 || stage[y][x] === 4 || stage[y][x] === 1 || stage[y][x] === 2;
 
   this.move = () => {
     protagonist.enemyCollision(this.x, this.y);

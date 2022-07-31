@@ -38,13 +38,13 @@ var stages = [
 ];
 
 var enemiesPosition = {
-    level0: [4,4,6,8,13,1],
-    level1: [4,4,6,8,13,1],
-    level2: [4,4,6,8,13,1],
-}
+  level0: [4, 4, 6, 8, 13, 1],
+  level1: [4, 4, 6, 8, 13, 1],
+  level2: [4, 4, 6, 8, 13, 1],
+};
 
-var keyPosition =  {
-    level0: [3,8],
-    level1: [12,1],
-    level2: [3,8],
-}
+var keyPosition = {
+  level0: [3, 8],
+  level1: [12, 1],
+  level2: [3, 8],
+};

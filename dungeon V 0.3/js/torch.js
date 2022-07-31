@@ -16,16 +16,6 @@ var torch = function (x, y) {
       else this.frame = 0;
     }
 
-    ctx.drawImage(
-      tileMap,
-      this.frame * 32,
-      64,
-      32,
-      32,
-      this.x * sideSquare,
-      this.y * sideSquare,
-      sideSquare,
-      sideSquare
-    );
+    ctx.drawImage(tileMap, this.frame * 32, 64, 32, 32, this.x * sideSquare, this.y * sideSquare, sideSquare, sideSquare);
   };
 };
