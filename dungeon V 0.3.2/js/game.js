@@ -1,24 +1,3 @@
-function randomizer(after) {
-  let random;
-
-  if (after || after === 0)
-    do {
-      random = Math.floor(Math.random() * 0 /* stages.length */);
-    } while (random === after);
-  else random = Math.floor(Math.random() * 0 /* stages.length */);
-
-  return random;
-}
-
-function resetEnemies() {
-  let enemiesDataObj = enemiesData[`level${level}`];
-
-  for (let i = 0; i < enemies.length; i++) {
-    enemies[i].x = enemiesDataObj[i].x;
-    enemies[i].y = enemiesDataObj[i].y;
-  }
-}
-
 function drawStage() {
   for (let y = 0; y < 10; y++) {
     for (let x = 0; x < 15; x++) {

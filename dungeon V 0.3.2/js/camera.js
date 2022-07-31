@@ -83,6 +83,17 @@ const objCamera = function (width, height, boardX, boardY, screenX, screenY) {
     resetEnemies();
   };
 
+  this.nextLevel = () => {
+    this.posX = 0;
+    this.posY = 0;
+
+    level = randomizer(level);
+
+    resetEnemies(level);
+    stage = [...stages[level]];
+    stage[keyPosition[`level${level}`].y][keyPosition[`level${level}`].x] = 4;
+  };
+
   this.enemyCollision = (x, y) => {
     if (this.posX + 2 === x && this.posY + 2 === y) {
       this.resetKey();
@@ -103,7 +114,7 @@ const objCamera = function (width, height, boardX, boardY, screenX, screenY) {
 
     if (object === 1) {
       if (this.key) {
-        this.resetKey();
+        this.nextLevel();
 
         console.log('Has ganado!!!');
       } else console.log('Te falta la llave, no puedes pasar');
