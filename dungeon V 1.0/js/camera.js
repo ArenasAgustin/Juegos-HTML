@@ -45,28 +45,28 @@ const objCamera = function (width, height, boardX, boardY, screenX, screenY) {
   };
 
   this.up = function () {
-    if (this.posY > 0 && !this.collision(this.posX + parseInt(width / 2), this.posY + parseInt(height / 2) - 1)) {
+    if (this.posY > 0 && !this.collision(this.posX + parseInt(width / 2), this.posY + parseInt(height / 2) - 1) && isOn) {
       this.posY--;
       this.objectLogic();
     }
   };
 
   this.down = function () {
-    if (this.posY < stage.length - this.height && !this.collision(this.posX + parseInt(width / 2), this.posY + parseInt(height / 2) + 1)) {
+    if (this.posY < stage.length - this.height && !this.collision(this.posX + parseInt(width / 2), this.posY + parseInt(height / 2) + 1) && isOn) {
       this.posY++;
       this.objectLogic();
     }
   };
 
   this.left = function () {
-    if (this.posX > 0 && !this.collision(this.posX + parseInt(width / 2) - 1, this.posY + parseInt(height / 2))) {
+    if (this.posX > 0 && !this.collision(this.posX + parseInt(width / 2) - 1, this.posY + parseInt(height / 2)) && isOn) {
       this.posX--;
       this.objectLogic();
     }
   };
 
   this.right = function () {
-    if (this.posX < stage[0].length && !this.collision(this.posX + parseInt(width / 2) + 1, this.posY + parseInt(height / 2))) {
+    if (this.posX < stage[0].length && !this.collision(this.posX + parseInt(width / 2) + 1, this.posY + parseInt(height / 2)) && isOn) {
       this.posX++;
       this.objectLogic();
     }
