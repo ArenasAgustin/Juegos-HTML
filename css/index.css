@@ -398,6 +398,32 @@ body {
   flex-direction: column;
 }
 
+.axis.x.activeUp,
+.axis.y.activeUp {
+  border: 2px solid #363439;
+  border-bottom: 3px solid #b7bec8;
+  border-top: 2px solid #0e0d0e;
+}
+
+.axis.x.activeDown,
+.axis.y.activeDown {
+  border: 2px solid #363439;
+  border-top: 4px solid #e8f0ff;
+  border-bottom: 1px solid #0e0d0e;
+}
+
+.axis.x.activeLeft,
+.axis.y.activeLeft {
+  border-right: 2px solid #b7bec8;
+  border-left: 2px solid #0e0d0e;
+}
+
+.axis.x.activeRight,
+.axis.y.activeRight {
+  border-left: 2px solid #b7bec8;
+  border-right: 2px solid #0e0d0e;
+}
+
 .axis .group {
   width: calc(var(--short) + 0px);
   height: calc(var(--short) - 4px);

@@ -1,22 +1,25 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Primeros juegos: Dungeon V 0.3.1</title>
 
-    <link href="./css/index.css" rel="stylesheet" type="text/css" />
+    <link href="css/index.css" rel="stylesheet" type="text/css" />
 
-    <script src="./js/utils.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    <script src="./js/variables.js"></script>
+    <script src="js/utils.js"></script>
 
-    <script src="./js/player.js"></script>
+    <script src="js/variables.js"></script>
 
-    <script src="./js/enemy.js"></script>
+    <script src="js/player.js"></script>
 
-    <script src="./js/torch.js"></script>
+    <script src="js/enemy.js"></script>
 
-    <script src="./js/camera.js"></script>
+    <script src="js/torch.js"></script>
 
-    <script src="./js/game.js"></script>
+    <script src="js/camera.js"></script>
+
+    <script src="js/game.js"></script>
   </head>
 
   <body onload="initialize();">
@@ -146,5 +149,33 @@
         </div>
       </div>
     </div>
+
+    <script>
+      const addClassList = (str) =>
+        $('.axis').each((_, element) => {
+          element.classList.add(str);
+        });
+
+      const removeClassList = (str) =>
+        $('.axis').each((_, element) => {
+          element.classList.remove(str);
+        });
+
+      $('#up')
+        .mouseup(() => removeClassList('activeUp'))
+        .mousedown(() => addClassList('activeUp'));
+
+      $('#down')
+        .mouseup(() => removeClassList('activeDown'))
+        .mousedown(() => addClassList('activeDown'));
+
+      $('#left')
+        .mouseup(() => removeClassList('activeLeft'))
+        .mousedown(() => addClassList('activeLeft'));
+
+      $('#right')
+        .mouseup(() => removeClassList('activeRight'))
+        .mousedown(() => addClassList('activeRight'));
+    </script>
   </body>
 </html>
