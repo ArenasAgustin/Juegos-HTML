@@ -3,22 +3,22 @@
   "name": "Dungeon V 1.1",
   "icons": [
     {
-      "src": "sword64.png",
+      "src": "./img/sword64.png",
       "sizes": "32x32 24x24 16x16",
       "type": "image/png"
     },
     {
-      "src": "sword64.png",
+      "src": "./img/sword64.png",
       "sizes": "64x64",
       "type": "image/png"
     },
     {
-      "src": "sword256.png",
+      "src": "./img/sword256.png",
       "type": "image/png",
       "sizes": "256x256"
     },
     {
-      "src": "sword512.png",
+      "src": "./img/sword512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
