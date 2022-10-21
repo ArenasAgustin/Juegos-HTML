@@ -1,0 +1,604 @@
+:root {
+  --width-bameboy: 380px;
+  --height-bameboy: 625px;
+  --height-top: 26px;
+  --width-crystal: 330px;
+  --height-crystal: 240px;
+  --width-screen: 210px;
+  --height-screen: 180px;
+  --size-gameboy-cross: 120px;
+  --size-gameboy-button: 47px;
+  --width-gameboy-option-button: 50px;
+  --height-gameboy-option-button: 12px;
+  --gameboy-bottom-depth: linear-gradient(transparent 97.75%, #0004 98.5%, #0005 99%);
+  --gameboy-stripe-gradient: linear-gradient(transparent 10px, #7d1a4a 11px 12px, transparent 12px 16px, #35224e 16px 18px, transparent 18px);
+}
+
+@font-face {
+  font-family: 'Pretendo';
+  src: url('../fonts/pretendo.woff2') format('woff2'), url('../fonts/pretendo.woff') format('woff'), url('../fonts/pretendo.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/lato.woff2') format('woff2'), url('../fonts/lato.woff') format('woff'), url('../fonts/lato.ttf') format('truetype');
+}
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100vw;
+  height: 100vh;
+  background-color: #225;
+  position: relative;
+}
+
+.gameboy {
+  width: var(--width-bameboy);
+  height: var(--height-bameboy);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #d3ccd3;
+  background-image: linear-gradient(-31deg, #8b8b8b 0 75px, transparent 80px), var(--gameboy-bottom-depth);
+  border-radius: 12px 12px 75px 12px;
+  box-shadow: 0 0 10px #0007, 1px 0 10px 3px #0008 inset;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gameboy-top {
+  display: flex;
+  padding-bottom: 5px;
+  magin-bottom: 5px;
+  height: var(--height-top);
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 18px 5px -10px #fff inset;
+}
+
+.gameboy-top > div {
+  border-radius: 0 0 2px 2px;
+  border: 1px solid #1111;
+  box-shadow: 0 2px 2px #2f2725aa;
+}
+
+.corner {
+  width: 25px;
+}
+
+.corner.left {
+  margin-right: 5px;
+}
+
+.corner.right {
+  margin-left: 5px;
+}
+
+.top {
+  width: 100%;
+}
+
+.top span {
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #eee;
+  text-shadow: 1px 2px 2px #0006;
+  border-radius: 15px;
+  padding: 1px 4px;
+  transform: translate(6px, 1px);
+  box-shadow: 0px 1px 2px #0005 inset, 0px -1px 2px #fffc inset;
+  opacity: 0.8;
+}
+
+.screen-container {
+  height: 325px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 25px;
+  border-top: 1px solid #fff8;
+  border-radius: 2% 2% 0% 0% / 0.5% 0.5% 0% 0%;
+}
+
+.gameboy-crystal {
+  width: var(--width-crystal);
+  height: var(--height-crystal);
+  background-color: #737488;
+  border-radius: 10px 10px 35px 10px;
+  border: 1px solid #666;
+  border-width: 0 1px 0 1px;
+  box-shadow: 0 0 2px #514c65, 0 -1px 1px #161118, 0 -2px 1px #a0939f, 0 -4px 1px #514c65, 0 0 2px 2px #9c99ac88 inset, 0 -1px 2px 1px #0006 inset;
+  position: relative;
+}
+
+.top-screen {
+  background: var(--gameboy-stripe-gradient);
+  position: relative;
+  height: 26px;
+  margin: 0 15px;
+  top: 0;
+}
+
+.top-screen span {
+  padding: 0 8px;
+  background: #767189;
+  position: absolute;
+  right: 40px;
+  top: 8px;
+}
+
+.top-screen .text {
+  font-size: 9.5px;
+}
+
+.bottom-screen {
+  display: flex;
+}
+
+.battery {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transform: translateY(-20px);
+}
+
+.battery .led {
+  width: 10px;
+  height: 10px;
+  background: #4a4748;
+  border-radius: 50%;
+  margin: 6px;
+  transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+}
+
+.battery .led.on {
+  background: #e11e0a;
+  background-image: linear-gradient(0deg, transparent, #fff2);
+  box-shadow: 0 0 2px 1.5px #d87473;
+}
+
+.battery .text {
+  font-size: 8px;
+}
+
+.gameboy-screen {
+  transform: translate(2px, 2px);
+  background: #9ca04c;
+  width: var(--width-screen);
+  height: var(--height-screen);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+  position: relative;
+}
+
+.canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: initial;
+  transition: all 0.6s ease-in-out;
+  -o-transition: all 0.6s ease-in-out;
+  -webkit-transition: all 0.6s ease-in-out;
+}
+
+.d-none {
+  display: none;
+}
+
+.screen-crystal {
+  background: rgba(156, 160, 76, 0.5);
+  box-shadow: 5px 5px 10px #0008 inset, -2px -1px 10px #0005 inset, 0 0 4px 3px #aaa4;
+  width: var(--width-screen);
+  height: var(--height-screen);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.text {
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  color: #eee;
+  text-shadow: 0 0 2px #eee9;
+}
+
+.brand {
+  color: #332c60;
+  padding-top: 4px;
+  text-shadow: 0 0 1px #30205855;
+}
+
+.brand .company {
+  font-family: 'Pretendo';
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.brand .product {
+  font-family: 'Lato';
+  font-size: 21px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.brand sub {
+  display: inline-block;
+  font-family: 'Lato';
+  font-size: 13px;
+  transform: translateY(2px);
+}
+
+.controls-container {
+  height: 275px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 140px;
+  padding: 0 20px 0 10px;
+  box-sizing: border-box;
+}
+
+.controls .gameboy-cross {
+  width: 130px;
+  height: 130px;
+}
+
+.controls .buttons {
+  width: 140px;
+  height: 68px;
+  background: linear-gradient(10deg, #eff2f099, #ae9fa699);
+  box-shadow: 0 0 4px 2px #ccc, 0 20px 4px -2px #6661 inset;
+  border-radius: 40px;
+  transform: translateY(30px) rotate(-25deg);
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.gameboy-button {
+  width: var(--size-gameboy-button);
+  height: var(--size-gameboy-button);
+  background-color: #e66e94;
+  border-radius: 50%;
+  background: radial-gradient(26px 26px at 24px 27px, #6f0119 75%, #a20d37 90%, #ef94b2);
+  box-shadow: 1px -4px 0 -3px #7c4b5b inset, -3px 7px 5px -2px #1e0009, 1px -1px 0 2px #53182b;
+  transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+}
+
+.gameboy-button:active {
+  box-shadow: -3px 4px 3px rgba(0, 0, 0, 0.25) inset, 2px -2px 3px rgba(0, 0, 0, 0.25) inset;
+}
+
+.gameboy-button .label {
+  font-family: 'Pretendo';
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: #302058;
+  transform: translate(35%, 450%);
+}
+
+.gameboy-cross {
+  --large: 85px;
+  --short: 22px;
+  --dark-color: #060206;
+
+  margin: 5px;
+  width: var(--size-gameboy-cross);
+  height: var(--size-gameboy-cross);
+  background: #cfc8d1;
+  background-image: radial-gradient(#0003 1%, transparent), linear-gradient(50deg, #e1deea 10%, #d9d2d5 90%);
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 0 1px #0008);
+}
+
+.axis {
+  background: var(--dark-color);
+  border-radius: 2px;
+  box-shadow: 0 0 1px 4px #000, 0 5px 2px 1px #0008;
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+}
+
+.axis::before,
+.axis::after {
+  content: '';
+  display: block;
+  background: #ddd;
+  filter: drop-shadow(2px 5px 1px red) drop-shadow(-2px -5px 1px blue);
+  width: 6px;
+  height: 6px;
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  position: absolute;
+}
+
+.axis.x::before,
+.axis.x::after {
+  --x: 0;
+  transform: translate(var(--x), 8px) rotate(var(--rotate));
+}
+
+.axis.x::before {
+  --x: -15px;
+  --rotate: 90deg;
+}
+
+.axis.x::after {
+  --x: 15px;
+  --rotate: -90deg;
+}
+
+.axis.y::before,
+.axis.y::after {
+  --y: 0;
+  transform: translate(8px, var(--y)) rotate(var(--rotate));
+}
+
+.axis.y::before {
+  --y: -15px;
+  --rotate: 180deg;
+}
+
+.axis.y::after {
+  --y: 15px;
+  --rotate: 0;
+}
+
+.axis.x::after {
+  right: 0;
+}
+
+.axis.y::after {
+  bottom: 0;
+}
+
+.axis.x {
+  width: var(--large);
+  height: var(--short);
+  position: absolute;
+  border: 2px solid #363439;
+  border-top: 3px solid #b7bec8;
+}
+
+.axis.y {
+  width: var(--short);
+  height: var(--large);
+  position: absolute;
+  border: 2px solid #363439;
+  border-top: 3px solid #b7bec8;
+  flex-direction: column;
+}
+
+.axis.x.activeUp,
+.axis.y.activeUp {
+  border: 2px solid #363439;
+  border-bottom: 3px solid #b7bec8;
+  border-top: 2px solid #0e0d0e;
+}
+
+.axis.x.activeDown,
+.axis.y.activeDown {
+  border: 2px solid #363439;
+  border-top: 4px solid #e8f0ff;
+  border-bottom: 1px solid #0e0d0e;
+}
+
+.axis.x.activeLeft,
+.axis.y.activeLeft {
+  border-right: 2px solid #b7bec8;
+  border-left: 2px solid #0e0d0e;
+}
+
+.axis.x.activeRight,
+.axis.y.activeRight {
+  border-left: 2px solid #b7bec8;
+  border-right: 2px solid #0e0d0e;
+}
+
+.axis .group {
+  width: calc(var(--short) + 0px);
+  height: calc(var(--short) - 4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0 3px;
+}
+
+.axis.y .group {
+  transform: rotate(90deg);
+  padding: 5px 1px;
+}
+
+.axis.x .group {
+  padding: 2px 1px;
+}
+
+.axis .group .band {
+  width: 5px;
+  height: 100%;
+  background: #181818;
+  border-radius: 5px;
+}
+
+.center {
+  width: calc(var(--short) + 5px);
+  height: calc(var(--short) + 5px);
+  background: var(--dark-color);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center .gap {
+  width: 80%;
+  height: 80%;
+  background: conic-gradient(#dde8f777 0 1%, transparent 10% 35%, #dde8f7 50%, transparent 65% 90%, #dde8f777 99%);
+  border-radius: 50%;
+}
+
+.gameboy-speaker {
+  width: 130px;
+  height: 90px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.gameboy-speaker .container {
+  display: flex;
+  width: 120px;
+  justify-content: space-around;
+  position: absolute;
+  right: 10px;
+  bottom: 35px;
+  transform: rotate(-30deg);
+}
+
+.band {
+  width: 8px;
+  height: 60px;
+  border-radius: 8px;
+  box-shadow: 3px 6px 1px rgba(0, 0, 0, 0.6) inset;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.option-buttons {
+  width: 130px;
+  height: 55px;
+  display: flex;
+  transform: translateY(30px);
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+}
+
+.bottom .phones {
+  display: inline-block;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  color: #eee;
+  border-radius: 15px;
+  padding: 2px 4px;
+  text-shadow: 1px 1px 1px #0003;
+  box-shadow: 1px 2px 2px #0005 inset, 0px -2px 2px #fffd inset;
+  opacity: 0.8;
+  transform: translate(-2px, 0);
+}
+
+.bottom .phones span {
+  filter: brightness(0) invert(0.95);
+}
+
+.slot {
+  margin: auto;
+}
+
+.slot,
+.slot::before,
+.slot::after {
+  width: 5px;
+  height: 10px;
+  background-image: radial-gradient(transparent, #0003);
+}
+
+.slot::before,
+.slot::after {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 10px;
+  position: absolute;
+}
+
+.slot::before {
+  transform: translateX(-8px);
+}
+
+.slot::after {
+  transform: translateX(8px);
+}
+
+.gameboy-option-button .container {
+  background: linear-gradient(to top, #eff2f0, #ae9fa6);
+  box-shadow: -4px 4px 3px -3px #0005 inset, 4px -4px 3px -3px #fffc inset;
+  transform: rotate(-28deg);
+  border-radius: 15px;
+  padding: 1px 0;
+}
+
+.gameboy-option-button .button {
+  background: #9e9baf;
+  background-image: linear-gradient(#c0beca, #7f7584);
+  border-radius: 10px;
+  box-shadow: -2px -2px 5px #0004 inset, 2px 2px 5px #fff3 inset, 2px 2px 6px #0007, -1px 2px 3px #000d;
+  width: var(--width-gameboy-option-button);
+  height: var(--height-gameboy-option-button);
+  margin: 3px 6px;
+  transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+}
+
+.gameboy-option-button .button:active {
+  box-shadow: -2px -2px 5px #0005 inset, 2px 2px 5px #0008 inset;
+}
+
+.gameboy-option-button .label {
+  font-family: 'Pretendo';
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  color: #302058;
+  transform: translate(10px, 2px) rotate(-28deg);
+  text-align: center;
+}
+
+.power-switch {
+  width: 34px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  background: #fff;
+  background-image: repeating-linear-gradient(to bottom, #fff 0 1px, #ddd 1px 3px);
+  transform: translate(50px, -8px);
+  clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+}
+
+.power-switch.on {
+  transform: translate(70px, -8px);
+}
